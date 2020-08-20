@@ -10,6 +10,7 @@ print(my_listComprehension)
 """
 import os
 import random
+import sys
 
 """
 #1. Calculate the square number of the first 20 numbers. Use square as the name of the list.
@@ -157,34 +158,56 @@ x = 5
 y = 0
 
 
-if type(x)!=int and type(x)!=float:
+if type(x)!=int or type(x)!=float:
     try:
-        z = float(x)/float(y)  
+        x=float(x)
     except:
-        raise TypeError(f"a no es compatible, debe ser un entero o float y son del tipo {type(x)},{type(y)}")
-if type(y)!=int and type(y)!=float:
+        raise TypeError(f"x o y no son compatibles, deben ser un entero o float y son del tipo {type(x)},{type(y)}")
+if type(y)!=int or type(y)!=float:
     try:
-        z = float(x)/float(y)
+        y=float(y)
     except:
-        raise TypeError(f"a no es compatible, debe ser un entero o float y son del tipo {type(x)},{type(y)}")
+        raise TypeError(f"x o y no son compatibles, deben ser un entero o float y son del tipo {type(x)},{type(y)}")
 if y==0:
-    raise ZeroDivisionError("b no puede ser 0")
+    raise ZeroDivisionError("y no puede ser 0")
+z=x/y
 print(z)
-"""
 
 
 #16. Handle the exception thrown by the code below by using try and except blocks. 
 # Check in provided resources the type of error you may use. 
 
 abc=[10,20,20]
-print(abc[3])
+try:
+    print(abc[3])
+         
+except:
+    raise IndexError('Has apuntado a un valor fuera de tu cadena, revisa su longitud y vuelve a intentarlo')
 
-"""
+
 
 #17. Handle at least two kind of different exceptions when dividing a couple of numbers provided by the user. 
 # Hint: take a look on python input function. 
 # Check in provided resources the type of error you may use. 
 
+x = input('Enter a number:\n' )
+y = input('Enter another number:\n')
+
+
+if type(x)!=int or type(x)!=float:
+    try:
+        x=float(x)  
+    except:
+        raise TypeError(f"a no es compatible, debe ser un entero o float y son del tipo {type(x)},{type(y)}")
+if type(y)!=int or type(y)!=float:
+    try:
+        y=float(y)
+    except:
+        raise TypeError(f"a no es compatible, debe ser un entero o float y son del tipo {type(x)},{type(y)}")
+if y==0:
+    raise ZeroDivisionError("y no puede ser 0")
+z=x/y
+print(z)
 
 
 
@@ -192,18 +215,43 @@ print(abc[3])
 # Check in provided resources the type of error you may use. 
 
 f = open('testfile','r')
-f.write('Test write this')
+if f ==True:
+    try :
+        f.write('Test write this')
+        print(f)
+    except:
+        raise FileNotFoundError('No he encontrado el archivo que has apuntado , vuelve a intentarlo')
 
 
 
 
 #19. Handle the exceptions that can be thrown by the code below using try and except blocks. 
 #Hint: the file could not exist and the data could not be convertable to int
-
+"""
+"""
 fp = open('myfile.txt')
     line = f.readline()
     i = int(s.strip())
+"""
+"""
+fp = open('myfile.txt')
+if fp ==True:
+    try :
+        line = f.readline()
+        i = int(s.strip())
+    except:
+        raise FileNotFoundError('No he encontrado el archivo que has apuntado, vuelve a intentarlo')
+print(line) 
 
+try:
+     print(s)
+except:
+    raise NameError('No has definido esa cadena, vuelve a intentarlo')
+if type(int(s.strip()))==int:
+    try:
+        i=int(s.strip())
+    except:
+        raise TypeError('Tus datos no pueden convertirse a un entero, vuelve a intentarlo')   
 
 
 
@@ -212,10 +260,25 @@ fp = open('myfile.txt')
 # Handle this exception using try and except blocks. 
 # You will probably need to import sys 
 
+
 def linux_interaction():
     assert ('linux' in sys.platform), "Function can only run on Linux systems."
     print('Doing something.')
 
+linux_interaction()
+
+
+#He entendido que hay que hacer lo mismo que en el ejemplo pero con try y except!
+def linux_interaction2():
+    try:
+         ('linux' in sys.platform)==True
+         print('Doing something.')
+    except:
+        print('Function can only run on Linux systems.')
+
+linux_interaction2()
+
+"""
 
 # Bonus Questions:
 
@@ -226,7 +289,7 @@ def linux_interaction():
 # Use a while loop with a try,except, else block to account for incorrect inputs.
 
 
-
+"""
 
 # 22. Find all of the numbers from 1-1000 that are divisible by any single digit besides 1 (2-9). 
 # Use results as the name of the list 
