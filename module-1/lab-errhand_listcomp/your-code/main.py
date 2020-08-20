@@ -1,5 +1,5 @@
 #Example: 
-"""
+
 eggs = (1,3,8,3,2)
 
 my_listComprehension = [1/egg for egg in eggs]
@@ -7,12 +7,12 @@ my_listComprehension = [1/egg for egg in eggs]
 print(my_listComprehension)
 
 #Insert here the module/library import statements 
-"""
+
 import os
 import random
 import sys
 
-"""
+
 #1. Calculate the square number of the first 20 numbers. Use square as the name of the list.
 # Remember to use list comprehensions and to print your results
 
@@ -227,13 +227,12 @@ if f ==True:
 
 #19. Handle the exceptions that can be thrown by the code below using try and except blocks. 
 #Hint: the file could not exist and the data could not be convertable to int
-"""
-"""
+"""Parte del enunciado:
 fp = open('myfile.txt')
     line = f.readline()
     i = int(s.strip())
 """
-"""
+
 fp = open('myfile.txt')
 if fp ==True:
     try :
@@ -278,7 +277,7 @@ def linux_interaction2():
 
 linux_interaction2()
 
-"""
+
 
 # Bonus Questions:
 
@@ -287,13 +286,30 @@ linux_interaction2()
 #21.  Write a function that asks for an integer and prints the square of it. 
 # Hint: we need to continually keep checking until we get an integer.
 # Use a while loop with a try,except, else block to account for incorrect inputs.
+##Lo he intentado pero no me saleee
 
+n=input('Introduce un número entero:\n')
+while type(n)!=int:
+    if type(n)==str:
+        try:
+            n=int(n)
+        except TypeError:
+            print(f"El formato no es compatible, debes poner un entero y has puesto {type(n)}")
+            n=int(input('Introduce un número entero:\n'))
+        except ValueError:
+            print("No has introducido un número, vuelve a intentarlo")
+            n=int(input('Introduce un número entero:\n'))
+    else:
+        n=int(input('Introduce un número entero:\n'))
 
-"""
+print(n**2)
+
 
 # 22. Find all of the numbers from 1-1000 that are divisible by any single digit besides 1 (2-9). 
 # Use results as the name of the list 
-
+aux={i:l for i in range(1,1001) for l in range(2,10) if i%l==0}
+results=list({i for i,l in aux.items()})
+print(results)
 
 
 
@@ -301,8 +317,22 @@ linux_interaction2()
 # You have the following user inputs and the Num_of_sections can not be less than 2.
 # Hint: Create a class derived from the pre-defined Exception class in Python
 
-Total_Marks = int(input("Enter Total Marks Scored: ")) 
-Num_of_Sections = int(input("Enter Num of Sections: "))
+Total_Marks = input("Enter Total Marks Scored: ")
+if type(Total_Marks)!=int:
+    try:
+        Total_Marks=int(Total_Marks)
+    except:
+        raise TypeError (f"El formato no es compatible, debes poner un entero y has puesto {type(Total_Marks)}")
+print(Total_Marks)
+
+Num_of_Sections = input("Enter Num of Sections: ")
+if type(Num_of_Sections)!=int:
+   try:
+        Num_of_Sections=int(Num_of_Sections)
+   except TypeError:
+        print(f"El formato no es compatible, debes poner un entero y has puesto {type(Num_of_Sections)}")
+if Num_of_Sections>2:
+    raise Exception ('No puedes introducir más de 2 secciones')
+print(Num_of_Sections)
 
 
-"""
