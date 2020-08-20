@@ -102,8 +102,8 @@ print(consonants)
 # You will probably need to import os library and some of its modules. You will need to make some online research.
 # Remember to use list comprehensions and to print your results.
 
-pwd=os.getcwd()
-files=[f for i in os.listdir(pwd)]
+
+files=[os.listdir(home/silviaherf/IH DAFT/Bootcamp/datamad0820)]
 print(files)
 
 
