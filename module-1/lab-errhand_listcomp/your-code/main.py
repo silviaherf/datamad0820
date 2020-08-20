@@ -9,6 +9,7 @@ print(my_listComprehension)
 #Insert here the module/library import statements 
 """
 import os
+import random
 
 """
 #1. Calculate the square number of the first 20 numbers. Use square as the name of the list.
@@ -95,7 +96,7 @@ vowels_=['a','e','i','o','u',' ']
 sentence='The quick brown fox jumped over the lazy dog'
 consonants=[c for c in sentence if c not in vowels_]
 print(consonants)
-"""
+
 
 
 #10. Find the folders you have in your madrid-oct-2018 local repo. Use files as name of the list.  
@@ -103,14 +104,19 @@ print(consonants)
 # Remember to use list comprehensions and to print your results.
 
 
-files=[os.listdir(home/silviaherf/IH DAFT/Bootcamp/datamad0820)]
+files=[os.listdir('/home/silviaherf/IH_DAFT/Bootcamp/datamad0820/')]
 print(files)
 
 
-"""
+
 #11. Create 4 lists of 10 random numbers between 0 and 100 each. Use random_lists as the name of the list. 
 #You will probably need to import random module
 # Remember to use list comprehensions and to print your results
+#########CONTINUNAR
+
+random_lists=[[r for r in random.choices(range(0,101), k=10)],[r for r in random.choices(range(0,101), k=10)],[r for r in random.choices(range(0,101), k=10)], [r for r in random.choices(range(0,101), k=10)]]
+print(random_lists)
+
 
 
 
@@ -119,8 +125,10 @@ print(files)
 # Remember to use list comprehensions and to print your results
 
 list_of_lists = [[1,2,3],[4,5,6],[7,8,9]]
+flatten_list=[i for l in list_of_lists for i in l]
+print(flatten_list)
 
-
+"""
 
 #13. Convert the numbers of the following nested list to floats. Use floats as the name of the list. 
 # Remember to use list comprehensions and to print your results.
@@ -129,8 +137,9 @@ list_of_lists = [['40', '20', '10', '30'], ['20', '20', '20', '20', '20', '30', 
 ['30', '20', '30', '50', '10', '30', '20', '20', '20'], ['100', '100'], ['100', '100', '100', '100', '100'], \
 ['100', '100', '100', '100']]
 
-
-
+floats=[[float(i) for l in list_of_lists[0] for i in l],[float(i) for l in list_of_lists[1] for i in l],[float(i) for l in list_of_lists[2] for i in l],[float(i) for l in list_of_lists[3] for i in l]]
+print(floats)
+"""
 
 #14. Handle the exception thrown by the code below by using try and except blocks. 
 
