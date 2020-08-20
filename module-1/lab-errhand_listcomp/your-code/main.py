@@ -1,5 +1,5 @@
 #Example: 
-
+"""
 eggs = (1,3,8,3,2)
 
 my_listComprehension = [1/egg for egg in eggs]
@@ -7,19 +7,22 @@ my_listComprehension = [1/egg for egg in eggs]
 print(my_listComprehension)
 
 #Insert here the module/library import statements 
+"""
+import os
 
-
-
-
+"""
 #1. Calculate the square number of the first 20 numbers. Use square as the name of the list.
 # Remember to use list comprehensions and to print your results
 
-
+square=[(n**2) for n in range(0,20)]
+print(square)
 
 
 #2. Calculate the first 50 power of two. Use power_of_two as the name of the list.
 # Remember to use list comprehensions and to print your results
 
+power_of_two=[(2**t) for t in range(0,50)]
+print(power_of_two)
 
 
 
@@ -27,24 +30,33 @@ print(my_listComprehension)
 # You will probably need to install math library with pip and import it in this file.  
 # Remember to use list comprehensions and to print your results
 
+sqrt=[(n**0.5) for n in range(0,100)]
+print(sqrt)
 
 
 
 #4. Create this list [-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0]. Use my_list as the name of the list.
 # Remember to use list comprehensions and to print your results
 
+my_list=[i for i in range(-10,1)]
+print(my_list)
 
 
 
 #5. Find the odd numbers from 1-100. Use odds as the name of the list. 
 # Remember to use list comprehensions and to print your results
 
+odd=[o for o in range(1,101) if not (o%2==0)]
+print(odd)
 
 
 
 #6. Find all of the numbers from 1-1000 that are divisible by 7. Use divisible_by_seven as the name of the list.
 # Remember to use list comprehensions and to print your results
 
+divisible_by_seven=[d for d in range(1,1000) if d%7==0]
+
+print(divisible_by_seven)
 
 
 
@@ -52,8 +64,11 @@ print(my_listComprehension)
 # Remember to use list comprehensions and to print your results
 # You can use the following test string but feel free to modify at your convenience
 
-teststring = 'Find all of the words in a string that are monosyllabic'
 
+teststring = 'Find all of the words in a string that are monosyllabic'
+vowels=['a','e','i','o','u']
+non_vowels=[nv for nv in teststring if nv not in vowels]
+print(non_vowels)
 
 
 
@@ -63,21 +78,36 @@ teststring = 'Find all of the words in a string that are monosyllabic'
 
 
 
+sentence='The Quick Brown Fox Jumped Over The Lazy Dog'
+enumerar=dict(enumerate(sentence))
+
+capital_letters=[v for k,v in enumerar.items() if v.isupper()==True]
+print(capital_letters)
+
+
+
 
 #9. Find all the consonants in the sentence 'The quick brown fox jumped over the lazy dog'.
 # Use consonants as the name of the list.
 # Remember to use list comprehensions and to print your results.
 
-
-
+vowels_=['a','e','i','o','u',' ']
+sentence='The quick brown fox jumped over the lazy dog'
+consonants=[c for c in sentence if c not in vowels_]
+print(consonants)
+"""
 
 
 #10. Find the folders you have in your madrid-oct-2018 local repo. Use files as name of the list.  
 # You will probably need to import os library and some of its modules. You will need to make some online research.
 # Remember to use list comprehensions and to print your results.
 
+pwd=os.getcwd()
+files=[f for i in os.listdir(pwd)]
+print(files)
 
 
+"""
 #11. Create 4 lists of 10 random numbers between 0 and 100 each. Use random_lists as the name of the list. 
 #You will probably need to import random module
 # Remember to use list comprehensions and to print your results
@@ -189,3 +219,4 @@ Total_Marks = int(input("Enter Total Marks Scored: "))
 Num_of_Sections = int(input("Enter Num of Sections: "))
 
 
+"""
