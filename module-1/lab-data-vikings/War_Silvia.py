@@ -96,8 +96,11 @@ fight.showStatus()
 
 while fight.showStatus()=="Let's fight again":
     fight.pokemon_playerAttack()
-    fight.pokemon_pcAttack()
-    fight.showStatus()
+    if fight.pokemon_player.health>0:
+        fight.pokemon_pcAttack()
+        fight.showStatus()
+    else:
+        fight.showStatus()
 
    
 
