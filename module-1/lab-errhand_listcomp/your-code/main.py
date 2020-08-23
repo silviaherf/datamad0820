@@ -20,6 +20,8 @@ square=[(n**2) for n in range(0,20)]
 print(square)
 
 
+
+
 #2. Calculate the first 50 power of two. Use power_of_two as the name of the list.
 # Remember to use list comprehensions and to print your results
 
@@ -34,6 +36,8 @@ print(power_of_two)
 
 sqrt=[(n**0.5) for n in range(0,100)]
 print(sqrt)
+
+##Amanda me dice que existe math.sqrt
 
 
 
@@ -105,7 +109,7 @@ print(consonants)
 # Remember to use list comprehensions and to print your results.
 
 
-files=[os.listdir('/home/silviaherf/IH_DAFT/Bootcamp/datamad0820/')]
+files=[os.listdir('/../../../../datamad0820/')]
 print(files)
 
 
@@ -138,9 +142,11 @@ list_of_lists = [['40', '20', '10', '30'], ['20', '20', '20', '20', '20', '30', 
 ['30', '20', '30', '50', '10', '30', '20', '20', '20'], ['100', '100'], ['100', '100', '100', '100', '100'], \
 ['100', '100', '100', '100']]
 
-floats=[[float(i) for l in list_of_lists[0] for i in l],[float(i) for l in list_of_lists[1] for i in l],[float(i) for l in list_of_lists[2] for i in l],[float(i) for l in list_of_lists[3] for i in l]]
-print(floats)
+##Esto NO!!: floats=[[float(i) for l in list_of_lists[0] for i in l],[float(i) for l in list_of_lists[1] for i in l],[float(i) for l in list_of_lists[2] for i in l],[float(i) for l in list_of_lists[3] for i in l]]
 
+
+floats = [[float(b)for b in a]for a in list_of_lists]
+print(floats)
 
 #14. Handle the exception thrown by the code below by using try and except blocks. 
 
@@ -287,7 +293,7 @@ linux_interaction2()
 # Hint: we need to continually keep checking until we get an integer.
 # Use a while loop with a try,except, else block to account for incorrect inputs.
 ##Lo he intentado pero no me saleee
-
+"""Esta forma es incorrecta, no funciona:
 n=input('Introduce un número entero:\n')
 while type(n)!=int:
     if type(n)==str:
@@ -303,7 +309,29 @@ while type(n)!=int:
         n=int(input('Introduce un número entero:\n'))
 
 print(n**2)
+"""
+def cuadradonum():
+    while True:
 
+        try:
+
+            entrada = int(input("Introduce un número entero o un 0 si quieres salir: "))
+
+            if entrada == 0:
+
+                break
+
+            print("El cuadrado del número es: ",entrada**2)   
+
+        except ValueError as x:
+
+            print("Has introducido", x)
+
+            print("Tienes que introducir un número entero")
+
+
+
+cuadradonum()
 
 # 22. Find all of the numbers from 1-1000 that are divisible by any single digit besides 1 (2-9). 
 # Use results as the name of the list 
