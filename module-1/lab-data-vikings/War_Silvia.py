@@ -1,94 +1,109 @@
 import random
 
 class Pokemon: 
-    def __init__(self, name, poke_type, attack):
+    def __init__(self, name, attack):
         self.name=name
-        self.poke_type=poke_type
         self.attack=attack
+        self.health=100
 
-    def attack(self):
+    def aTtack(self):
             return f'{self.name} used {self.attack}!'
 
-    def receiveDamage(self):
-        self.health=random.choice(range(50,101,1))
-        self.damage=random.choice(range(1,101,1))
-        self.health-=self.damage
+    def receiveDamage(self,damage):
+        self.health=self.health-damage
         if self.health>0:
-            return f'{self.name} has received {self.damage} points of damage'
-        
+            return f'{self.name} has received {damage} points of damage, Its health is: {self.health}'
+
+        else: 
+            return f"{self.name} has received {damage} points of damage,It's dead!"
+
+       
 
 
 class Pikachu(Pokemon):
     def __init__(self,name, attack):
-        super().__init__(name,attack)
-        super().attack()
-        super().receiveDamage()
-   
+        super().__init__(name,attack)   
     def battleCry(self):
-        return 'Pika Pika chu!'
+        return f'{self.name} said: "Pika Pika chu!"'
 
 
 
 class Charmander(Pokemon):
     def __init__(self,name, attack):
         super().__init__(name,attack)
-        super().attack()
-        super().receiveDamage()
    
     def battleCry(self):
-        return 'Charmander!'    
+        return f'{self.name} said: "Charmander!"'    
 
         
 class Bulbasur(Pokemon):
     def __init__(self,name, attack):
         super().__init__(name,attack)
-        super().attack()
-        super().receiveDamage()
    
     def battleCry(self):
-        return 'Bulba bulba!'     
+        return f'{self.name} said: "Bulba bulba!"'     
 
 # Fight
 
-
-dict_pokemon={
-'Pikachu':['Pikachu','Electric','Thunder Shock'],'Charmander':['Charmander','Fire','Ember'],'Bulbasur':['Bulbasur','Grass','Vine Whip']}
-
 class Fight:
     def __init__(self):
-        self.pokemon_player=input('Choose your Pokemon: Pikachu, Charmander or Bulbasur')
-        while pokemon_player not in dict_pokemon.keys():
-            print('You did not choose between those 3 Pokemon. Try again.')
-            self.pokemon_player=input('Choose your Pokemon: Pikachu, Charmander or Bulbasur')
-        self.pokemons=['Pikachu','Charmander','Bulbasur']
-        {'Pikachu':['Pikachu','Electric','Thunder Shock'],'Charmander':['Charmander','Fire','Ember'],'Bulbasur':['Bulbasur','Grass','Vine Whip']}
-        
-        self.pokemon_pc=random.choice(pokemons)
-        while self.pokemon_pc==pokemon_player:
-            self.pokemon_pc=random.choice(pokemons)
-"""
-    def vikingAttack(self):
-        self.saxon=random.choice(self.saxonArmy)
-        self.viking=random.choice(self.vikingArmy)
-        saxon_health=self.saxon.receiveDamage(self.viking.attack())
-        if self.saxon.health<=0:
-            self.saxonArmy.remove(self.saxon) 
-        return saxon_health       
+        self.pikachu=Pikachu('Pikachu','Thunder Shock')
+        self.charmander=Charmander('Charmander','Ember')
+        self.bulbasur=Bulbasur('Bulbasur','Vine Whip')
 
-    def saxonAttack(self):
-        self.saxon=random.choice(self.saxonArmy)
-        self.viking=random.choice(self.vikingArmy)
-        viking_health=self.viking.receiveDamage(self.saxon.attack())
-        if self.viking.health<=0:
-            self.vikingArmy.remove(self.viking)   
-        return viking_health
+    def selectPokemons(self):
+        self.pokemons=[self.pikachu,self.charmander,self.bulbasur]
+        self.pokemon_player=input(f'Choose your Pokemon: {self.pikachu.name}, {self.charmander.name}  or {self.bulbasur.name}\n')
+        while self.pokemon_player not in ('Pikachu','Charmander','Bulbasur'):
+            print('You did not choose between those 3 Pokemon. Try again.\n')
+            self.pokemon_player=input(f'Choose your Pokemon: {self.pikachu.name}, {self.charmander.name}  or {self.bulbasur.name}\n')  
+            break 
+        if self.pokemon_player==self.pikachu.name:
+            self.pokemon_player=self.pikachu
+        elif self.pokemon_player==self.charmander.name:
+            self.pokemon_player=self.charmander
+        elif self.pokemon_player==self.bulbasur.name:
+            self.pokemon_player=self.bulbasur      
+        self.pokemon_pc=random.choice(self.pokemons)
+        while self.pokemon_pc==self.pokemon_player:
+            self.pokemon_pc=random.choice(self.pokemons)
+            break
+        return f"You chose {self.pokemon_player.name}, you'll fight against {self.pokemon_pc.name}" 
+
+    def pokemon_playerAttack(self):
+        return self.pokemon_player.battleCry(),self.pokemon_player.aTtack(), self.pokemon_pc.receiveDamage(random.choice(range(1,101,1)))    
+        
+
+    def pokemon_pcAttack(self):
+        return  self.pokemon_pc.battleCry(),self.pokemon_pc.aTtack(), self.pokemon_player.receiveDamage(random.choice(range(1,101,1)))
+
 
     def showStatus(self):
-        if (len(self.saxonArmy)==0):
-            return 'Vikings have won the war of the century!'
-        elif (len(self.vikingArmy)==0):
-            return 'Saxons have fought for their lives and survive another day...'
-        elif (len(self.saxonArmy)>0) or (len(self.vikingArmy)>0):
-            return 'Vikings and Saxons are still in the thick of battle.'
+        if self.pokemon_player.health<=0:
+            return f'{self.pokemon_player.name} lose against {self.pokemon_pc.name}'
+        elif self.pokemon_pc.health<=0:
+            return f'{self.pokemon_pc.name} lose against {self.pokemon_player.name}'
+        elif self.pokemon_player.health>0 and self.pokemon_pc.health>0:
+            return "Let's fight again!"
+            
+
+
+fight=Fight()
+fight.selectPokemons()
+fight.pokemon_playerAttack()
+fight.pokemon_pcAttack()
+fight.showStatus()
+
+while fight.showStatus()=="Let's fight again":
+    fight.pokemon_playerAttack()
+    fight.pokemon_pcAttack()
+    fight.showStatus()
+
+   
+
 
 """
+
+
+"""
+
