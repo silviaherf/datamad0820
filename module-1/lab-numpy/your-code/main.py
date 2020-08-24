@@ -130,28 +130,35 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-for k,j,i in f:
-        if (d_min<i<d_mean):
-                f[k,j,i]=25
-        elif (d_mean<i<d_max):
-                f[k,j,i]=75
-        elif  (i==d_min):
-                f[k,j,i]=0 
-        elif  (i==d_max):
-                f[k,j,i]=100
-
-
+for ind1,k in enumerate(f):
+        for ind2,j in enumerate(k):
+                for ind3,i in enumerate(j):
+                        if (d_min<i<d_mean):
+                                f[ind1,ind2,ind3]=25
+                        elif  (i==d_mean):
+                                f[ind1,ind2,ind3]=50                                 
+                        elif (d_mean<i<d_max):
+                                f[ind1,ind2,ind3]=75
+                        elif  (i==d_min):
+                                f[ind1,ind2,ind3]=0 
+                        elif  (i==d_max):
+                                f[ind1,ind2,ind3]=100
 
 
 print(f)
 
+#No entiendo por qué no me saleeee
 
 
 
-"""
 
 
 #17. Print d and f. Do you have your expected f?
+
+print('d:',d)
+print('f:',f)
+
+"""
 For instance, if your d is:
 array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
         [1.75354326, 1.69403643, 1.36729252, 1.61415071, 1.12104981],
@@ -174,6 +181,21 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
+
+for ind1,k in enumerate(f):
+        for ind2,j in enumerate(k):
+                for ind3,i in enumerate(j):
+                        if (d_min<i<d_mean):
+                                f[ind1,ind2,ind3]='A'
+                        elif  (i==d_mean):
+                                f[ind1,ind2,ind3]=50   
+                        elif (d_mean<i<d_max):
+                                f[ind1,ind2,ind3]='B'
+                        elif  (i==d_min):
+                                f[ind1,ind2,ind3]='C'
+                        elif  (i==d_max):
+                                f[ind1,ind2,ind3]='D'
+
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
 array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'D',  'D',  'B',  'B',  'B'],
