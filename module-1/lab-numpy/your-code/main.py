@@ -179,22 +179,25 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 
-"""
+
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
 
 for ind1,k in enumerate(f):
         for ind2,j in enumerate(k):
                 for ind3,i in enumerate(j):
                         if (d_min<i<d_mean):
-                                f[ind1,ind2,ind3]='A'
+                                f.place(f,f[ind1,ind2,ind3],'A')
                         elif  (i==d_mean):
-                                f[ind1,ind2,ind3]=50   
+                                f.place(f,f[ind1,ind2,ind3],'B')  
                         elif (d_mean<i<d_max):
-                                f[ind1,ind2,ind3]='B'
+                                f.place(f,f[ind1,ind2,ind3],'C') 
                         elif  (i==d_min):
-                                f[ind1,ind2,ind3]='C'
+                                f.place(f,f[ind1,ind2,ind3],'D') 
                         elif  (i==d_max):
-                                f[ind1,ind2,ind3]='D'
+                                f.place(f,f[ind1,ind2,ind3],'E') 
+
+#Tampoco me sale :(
+"""
 
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
 array([[[ 'D',  'D',  'D',  'B',  'D'],
