@@ -119,13 +119,9 @@ f=np.empty([2,3,5])
 
 print("f:",f)
 
-
-"""
-"""
-
-
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
+
 If a value in d is larger than d_mean but smaller than d_max, assign 75 to the corresponding value in f.
 If a value equals to d_mean, assign 50 to the corresponding value in f.
 Assign 0 to the corresponding value(s) in f for d_min in d.
@@ -134,10 +130,27 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
+for k,j,i in f:
+        if (d_min<i<d_mean):
+                f[k,j,i]=25
+        elif (d_mean<i<d_max):
+                f[k,j,i]=75
+        elif  (i==d_min):
+                f[k,j,i]=0 
+        elif  (i==d_max):
+                f[k,j,i]=100
+
+
+
+
+print(f)
+
 
 
 
 """
+
+
 #17. Print d and f. Do you have your expected f?
 For instance, if your d is:
 array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
