@@ -56,8 +56,8 @@ print(a.size==b.size)
 
 try:
         print(a+b)
-except:
-        print(f'ValueError: operands could not be broadcast together with shapes {a.shape} {b.shape}')
+except Exception as e:
+        print(e)
 
 
 
@@ -72,8 +72,9 @@ print('c:',c)
 try:
         d=a+c
         print('d:',d)
-except:
-        print(f'ValueError: operands could not be broadcast together with shapes {a.shape} {b.shape}')
+
+except Exception as e:
+        print(e)
 
 #Funciona porque ahora sí tienen la misma estructura:2 arrays de 3 filasx5columnas
 
@@ -97,7 +98,7 @@ print('e:',e)
 
 #13. Does e equal to a? Why or why not?
 
-if (e.shape==a.shape) & (e.size==a.size) & (e.all()==a.all()):
+if (e.shape==a.shape) and (e.size==a.size) and (e.all()==a.all()):
         print('Sí, e y a son iguales')
 else:
         print('No, e y a no son iguales')
@@ -130,7 +131,8 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-for ind1,k in enumerate(f):
+
+for ind1,k in enumerate(d):
         for ind2,j in enumerate(k):
                 for ind3,i in enumerate(j):
                         if (d_min<i<d_mean):
@@ -147,7 +149,7 @@ for ind1,k in enumerate(f):
 
 print(f)
 
-#No entiendo por qué no me saleeee
+#Arreglado con comentarios Felipe
 
 
 
@@ -182,21 +184,18 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
 
-for ind1,k in enumerate(f):
-        for ind2,j in enumerate(k):
-                for ind3,i in enumerate(j):
-                        if (d_min<i<d_mean):
-                                f.place(f,f[ind1,ind2,ind3],'A')
-                        elif  (i==d_mean):
-                                f.place(f,f[ind1,ind2,ind3],'B')  
-                        elif (d_mean<i<d_max):
-                                f.place(f,f[ind1,ind2,ind3],'C') 
-                        elif  (i==d_min):
-                                f.place(f,f[ind1,ind2,ind3],'D') 
-                        elif  (i==d_max):
-                                f.place(f,f[ind1,ind2,ind3],'E') 
+f=np.empty([2,3,5],dtype=str)
 
-#Tampoco me sale :(
+np.place(f,d==d_max,'A')
+
+np.place(f,(d_mean<d) & (d<d_max),'B')
+
+np.place(f,d==d_mean,'C')
+
+np.place(f,(d_min<d) & (d<d_mean),'D')
+
+np.place(f,d==d_min,'E')
+print(f)
 """
 
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
