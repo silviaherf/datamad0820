@@ -96,21 +96,17 @@ rm -r $name
 ##a)Imprime los ficheros
 ##B)Imprime las longitudes de los nombres de los ficheros
 ##C)Imprime outputs con la siguiente estructura: lorem has 5 characters lenght
+##No lo he conseguido!!
 
-
-files= find lorem  -type f -name "*.txt"
+files=("lorem/lorem.txt" "lorem/at.txt" "lorem/sed.txt")
 for file in $files
 do 
-nombre=basename $file  
-echo $nombre
-n= cat $nombre | wc -c
+name=basename $file
+echo $name
+n=  wc -c $name 
 echo $n
-echo $($nombre has $n characters length)
+echo "$name has $n characters length"
 done
-
-basename "$FILE"
-f="$(basename -- $FILE)"
-echo "$f"
 
 
 ##Muestra los procesos de forma jerárquica que se están ejecutando en tu ordenador:
