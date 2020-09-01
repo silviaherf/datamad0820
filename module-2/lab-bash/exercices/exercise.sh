@@ -69,3 +69,68 @@ cat lorem/at.txt | grep "et" | wc -l
 
 cat * | grep "et" | wc -l
 
+## BONUS
+##Almacena en una variable name tu nombre.
+read name
+
+"""
+Me he venido arriba y he hecho un .py con eso...antes de ver que era tan fácil!!
+
+python3 exercices/bonus.py
+
+"""
+
+##Imprime esa variable.
+echo $name
+
+
+##Crea un directorio nuevo que se llame como el contenido de la variable name.
+mkdir $name
+
+##Elimina ese directorio.
+rm -r $name
+
+##Por cada archivo dentro de la carpeta lorem imprime el número de carácteres que tienen sus nombres. Intenta primero mostrar los archivos 
+##mediante un bucle for
+
+##a)Imprime los ficheros
+##B)Imprime las longitudes de los nombres de los ficheros
+##C)Imprime outputs con la siguiente estructura: lorem has 5 characters lenght
+
+
+files= find lorem  -type f -name "*.txt"
+for file in $files
+do 
+nombre=basename $file  
+echo $nombre
+n= cat $nombre | wc -c
+echo $n
+echo $($nombre has $n characters length)
+done
+
+basename "$FILE"
+f="$(basename -- $FILE)"
+echo "$f"
+
+
+##Muestra los procesos de forma jerárquica que se están ejecutando en tu ordenador:
+##a)Usando el comando top o htop
+htop
+##b)Usando el comando ps con argumentos
+ps -ef
+
+##Muestra información sobre tu procesador por pantalla
+sudo dmidecode -s system-manufacturer processor-version
+
+##Crea 3 alias y haz que estén disponibles cada vez que inicias sesión
+alias imagenes=/home/silviaherf/pictures
+alias home=/home
+alias gch='git checkout'
+
+##Comprime las carpetas lorem y lorem-copy en un archivo llamado lorem-compressed.tar.gz
+
+ tar -czvf lorem-compressed.tar.gz lorem lorem-copy 
+
+##Descomprime el archivo lorem-compressed.tar.gz en la carpeta lorem-uncompressed
+mkdir lorem-uncompressed
+tar -xzvf lorem-compressed.tar.gz -C lorem-uncompressed
