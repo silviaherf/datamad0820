@@ -27,55 +27,76 @@ MAXITEMS 10
 
 6. All the companies that don't include the partners field.
 FILTER {partners:{$exists:false}}
- 
+ ##Esto da cero resultados porque todas tienen el campo, aunque sea vacío
 
 7. All the companies that have a null type of value on the category_code field.
 FILTER  {category_code:{$type:null}}
+ ##Esto da cero resultados porque todas tienen el campo, aunque sea vacío
 
 8. All the companies that have at least 100 employees but less than 1000. Retrieve only the name and number of employees fields.
 FILTER {"$and": [{"number_of_employees": {$gte: 100}},{"number_of_employees": {$lt: 1000}}] } 
 PROJECT {name:1,number_of_employees:1,_id:0}
 
 9. Order all the companies by their IPO price in a descending order.
-1
-# Your Code
+SORT {ipo.valuation_amount:-1}
+
 10. Retrieve the 10 companies with more employees, order by the number of employees
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+SORT {number_of_employees:-1}
+MAXITEMS 10
+
 11. All the companies founded on the second semester of the year. Limit your search to 1000 companies.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER { founded_month: { $in: [7,8,9,10,11,12] } }
+MAXITEMS 1000
+
 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.00
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {"$and": [{"founded_year": {$lt: 2000}},{"acquisitions.price_amount" : {$gt: 1000000}}] } 
+
+
 13. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their name and acquisition field.
 FILTER 
 PROJECT
 SORT 
 MAXITEMS 20
+
 14. Order the companies by their founded year, retrieving only their name and founded year.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 15. All the companies that have been founded on the first seven days of the month, including the seventh. Sort them by their acquisition price in a descending order. Limit the search to 10 documents.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 16. All the companies on the 'web' category that have more than 4000 employees. Sort them by the amount of employees in ascending order.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 17. All the companies whose acquisition amount is more than 10.000.000, and currency is 'EUR'.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 18. All the companies that have been acquired on the first trimester of the year. Limit the search to 10 companies, and retrieve only their name and acquisition fields.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 Bonus
 19. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.
-1
-# Your Code
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
+
 20. All the companies that have been 'deadpooled' after the third year
+FILTER 
+PROJECT
+SORT 
+MAXITEMS 20
