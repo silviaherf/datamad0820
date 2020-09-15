@@ -10,18 +10,17 @@ SORT {number_of_employees:1}
 MAXITEMS 20
 
 3. All the companies founded between 2000 and 2005, both years included. Retrieve only the name and founded_year fields.
-FILTER {"$and": [{founded_year: {$gte: 2000}},{founded_year: {$lte: 2005}}] }
+FILTER {$and: [{founded_year: {$gte: 2000}},{founded_year: {$lte: 2005}}] }
 PROJECT  {name:1,founded_year:1,_id:0}
 
 
 4. All the companies that had a Valuation Amount of more than 100.000.000 and have been founded before 2010. Retrieve only the name and ipo fields.
-FILTER  {"$and": [{"ipo.valuation_amount": {$gt: 100000000}},{founded_year: {$lte: 2010}}] } 
+FILTER  {$and: [{ipo.valuation_amount: {$gt: 100000000}},{founded_year: {$lte: 2010}}] } 
 PROJECT  {name:1,ipo:1,_id:0}
 
 
-
 5. All the companies that have less than 1000 employees and have been founded before 2005. Order them by the number of employees and limit the search to 10 companies.
-FILTER  {"$and": [{"number_of_employees": {$lt: 1000}},{founded_year: {$lt: 2005}}] } 
+FILTER  {$and: [{number_of_employees: {$lt: 1000}},{founded_year: {$lt: 2005}}] } 
 SORT {number_of_employees:1}
 MAXITEMS 10
 
@@ -34,7 +33,7 @@ FILTER  {category_code:{$type:null}}
  ##Esto da cero resultados porque todas tienen el campo, aunque sea vacío
 
 8. All the companies that have at least 100 employees but less than 1000. Retrieve only the name and number of employees fields.
-FILTER {"$and": [{"number_of_employees": {$gte: 100}},{"number_of_employees": {$lt: 1000}}] } 
+FILTER {$and: [{number_of_employees: {$gte: 100}},{number_of_employees: {$lt: 1000}}] } 
 PROJECT {name:1,number_of_employees:1,_id:0}
 
 9. Order all the companies by their IPO price in a descending order.
@@ -49,32 +48,29 @@ FILTER { founded_month: { $in: [7,8,9,10,11,12] } }
 MAXITEMS 1000
 
 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.00
-FILTER {"$and": [{"founded_year": {$lt: 2000}},{"acquisitions.price_amount" : {$gt: 1000000}}] } 
+FILTER {$and: [{founded_year: {$lt: 2000}},{acquisitions.price_amount : {$gt: 1000000}}] } 
 
 
 13. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their name and acquisition field.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {acquisitions.acquired_year: {$gt: 2010}}
+PROJECT {name:1,acquisition:1,_id:0}
+SORT {"acquisitions.price_amount":-1}
+#En realidad no dice si se ordena en descendente, pero me parece que tiene más sentido
 
-14. Order the companies by their founded year, retrieving only their name and founded year.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+14. Order the companies by their founded year, retrieving only their name and founded year. 
+PROJECT {name:1,founded_year:1,_id:0}
+SORT {founded_year:1}
+
 
 15. All the companies that have been founded on the first seven days of the month, including the seventh. Sort them by their acquisition price in a descending order. Limit the search to 10 documents.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER { founded_day: { $in: [1,2,3,4,5,6,7] } }
+SORT {"acquisitions.price_amount":-1}
+MAXITEMS 10
 
 16. All the companies on the 'web' category that have more than 4000 employees. Sort them by the amount of employees in ascending order.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER $and [{category_code:"web"},{number_of_employees:{$gt:4000}} ] 
+SORT {number_of_employees:1}
+
 
 17. All the companies whose acquisition amount is more than 10.000.000, and currency is 'EUR'.
 FILTER 
