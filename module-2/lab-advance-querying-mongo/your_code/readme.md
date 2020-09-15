@@ -1,6 +1,6 @@
 1. All the companies whose name match 'Babelgum'. Retrieve only their name field.
 
-FILTER ({name:'Babelgum'}
+FILTER {name:'Babelgum'}
 PROJECT {name:1,_id:0}
 
 2. All the companies that have more than 5000 employees. Limit the search to 20 companies and sort them by number of employees.
@@ -15,7 +15,7 @@ PROJECT  {name:1,founded_year:1,_id:0}
 
 
 4. All the companies that had a Valuation Amount of more than 100.000.000 and have been founded before 2010. Retrieve only the name and ipo fields.
-FILTER  {$and: [{ipo.valuation_amount: {$gt: 100000000}},{founded_year: {$lte: 2010}}] } 
+FILTER  {$and: [{"ipo.valuation_amount": {$gt: 100000000}},{founded_year: {$lte: 2010}}] } 
 PROJECT  {name:1,ipo:1,_id:0}
 
 
@@ -37,7 +37,7 @@ FILTER {$and: [{number_of_employees: {$gte: 100}},{number_of_employees: {$lt: 10
 PROJECT {name:1,number_of_employees:1,_id:0}
 
 9. Order all the companies by their IPO price in a descending order.
-SORT {ipo.valuation_amount:-1}
+SORT {"ipo.valuation_amount":-1}
 
 10. Retrieve the 10 companies with more employees, order by the number of employees
 SORT {number_of_employees:-1}
@@ -47,12 +47,14 @@ MAXITEMS 10
 FILTER { founded_month: { $in: [7,8,9,10,11,12] } }
 MAXITEMS 1000
 
+##He visto que se puede usar {$range: [7,12]}, pero no me saca valores!
+
 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.00
-FILTER {$and: [{founded_year: {$lt: 2000}},{acquisitions.price_amount : {$gt: 1000000}}] } 
+FILTER {$and: [{founded_year: {$lt: 2000}},{"acquisitions.price_amount" : {$gt: 1000000}}] } 
 
 
 13. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their name and acquisition field.
-FILTER {acquisitions.acquired_year: {$gt: 2010}}
+FILTER {"acquisitions.acquired_year": {$gt: 2010}}
 PROJECT {name:1,acquisition:1,_id:0}
 SORT {"acquisitions.price_amount":-1}
 #En realidad no dice si se ordena en descendente, pero me parece que tiene más sentido
@@ -68,31 +70,24 @@ SORT {"acquisitions.price_amount":-1}
 MAXITEMS 10
 
 16. All the companies on the 'web' category that have more than 4000 employees. Sort them by the amount of employees in ascending order.
-FILTER $and [{category_code:"web"},{number_of_employees:{$gt:4000}} ] 
+FILTER {$and :[{category_code:"web"},{number_of_employees:{$gt:4000}} ] }
 SORT {number_of_employees:1}
 
 
 17. All the companies whose acquisition amount is more than 10.000.000, and currency is 'EUR'.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {$and:[{"acquisitions.price_amount": {$gt: 10000000}},{"ipo.valuation_currency_code":'EUR'}]}
+#salen cero registros
 
 18. All the companies that have been acquired on the first trimester of the year. Limit the search to 10 companies, and retrieve only their name and acquisition fields.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {adquired_month: $in [1,2,3]}
+PROJECT {name:1,acquisition:1,_id:0}
+MAXITEMS 10
 
 Bonus
 19. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {$and: [{founded_year: {$gte: 2000}},{founded_year: {$lte: 2010}},{"acquisitions.acquired_year":{$gte:2011}}] }
+
 
 20. All the companies that have been 'deadpooled' after the third year
-FILTER 
-PROJECT
-SORT 
-MAXITEMS 20
+FILTER {{$subtract: ["$founded_year", "$deadpooled_year"] } : { $elemMatch: {$gt:3} } }
+#No es así pero lo he intentado :)
