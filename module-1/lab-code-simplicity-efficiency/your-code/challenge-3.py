@@ -12,6 +12,30 @@ The following function shows one way to solve the problem but the code is not id
 Refactor the code based on what you have learned about code simplicity and efficiency.
 """
 
+
+from math import hypot
+
+def hipotenusa():
+    x = int(input("What is the maximal length of the triangle side? Enter a number: "))
+    minim=5
+    solution=0
+    for hip in range(x,minim,-1):
+        for b in range(x,(minim-1),-1):
+            for a in range(x,(minim-2),-1):
+                if type(hypot(b,a)==int) and hypot(b,a)<x and  (hypot(b,a)- int(hypot(b,a)))==0:                   
+                    solution=int(hypot(b,a))
+                    break
+    return print(f"The longest side possible is {solution}")
+
+
+def main():
+     hipotenusa()
+
+if __name__=="__main__":
+    main()   
+
+"""
+
 def my_function(X):
     solutions = []
     for x in range(5, X):
@@ -28,3 +52,5 @@ def my_function(X):
 X = input("What is the maximal length of the triangle side? Enter a number: ")
 
 print("The longest side possible is " + str(my_function(int(X))))
+
+"""
