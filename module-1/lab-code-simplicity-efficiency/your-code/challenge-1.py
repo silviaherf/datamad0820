@@ -8,12 +8,46 @@ expects.
 The code is very long and messy. Refactor it according to what you have learned about
 code simplicity and efficiency.
 """
+def calculator():
+    numbers = {'one': 1, 'two': 2, "three":3, "four":4,  "five": 5,  "zero":0, "six":6, "seven":7,
+     "eight" :8, "nine":9, "ten":10,"plus":"+", "minus":"-", "negative":'-'}
 
-print('Welcome to this calculator!')
-print('It can add and subtract whole numbers from zero to five')
-a = input('Please choose your first number (zero to five): ')
-b = input('What do you want to do? plus or minus: ')
-c = input('Please choose your second number (zero to five): ')
+    print('Welcome to this calculator!')
+    print('It can add and subtract whole numbers from zero to five')
+    a = input('Please choose your first number (zero to five): ')
+    b = input('What do you want to do? plus or minus: ')
+    c = input('Please choose your second number (zero to five): ')
+    result=0
+    
+    if a not in numbers.keys() or b not in numbers.keys() or c not in numbers.keys():
+        print("I am not able to answer this question. Check your input.")
+        pass
+
+    else:
+        if numbers[b]=='+':
+            result=numbers[a]+numbers[c]
+        elif numbers[b]=='-':
+            if numbers[a]>=numbers[c]:
+                result=numbers[a]-numbers[c]
+                key=''
+                key=[k for k,v in numbers.items() if v==result][0]
+            else:
+                key=''
+                result=(-(numbers[a]-numbers[c]))
+                key="negative "+ [k for k,v in numbers.items() if v==result][0]
+    
+        print(f"{a} {b} {c} equals {key}")
+
+    return print("Thanks for using this calculator, goodbye :)")
+
+calculator()
+
+
+
+"""
+
+
+
 
 if a == 'zero' and b == 'plus'  and c == 'zero':
     print("zero plus zero equals zero")
@@ -167,3 +201,5 @@ if (not a == 'zero' and not a == 'one' and not a == 'two' and not a == 'three' a
     print("I am not able to answer this question. Check your input.")
 
 print("Thanks for using this calculator, goodbye :)")
+
+"""
