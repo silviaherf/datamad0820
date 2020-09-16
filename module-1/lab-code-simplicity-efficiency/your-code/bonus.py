@@ -19,14 +19,56 @@ class ClimbStairs:
     Class constructor
     total_steps: how many steps in total in the stair
     """
+
+    def __init__(self, total_steps=10, current_step=0): 
+        self.total_steps = int(input("How many steps in the stair?"))
+        self.current_step = int(input("Which step are you at?"))
+        self.calculation_count = 0
+
+
+    def calc_solutions(self):
+        # If the current step is already larger than total steps, there's 0 solution
+        if self.current_step > self.total_steps:
+            return 0
+
+        # If the current step equals to the total steps, there is only one solution because I've reached the top
+        elif self.current_step == self.total_steps:
+            return 1
+
+        # If I am still in the middle of the stair, continue calculating
+        else:
+            results=[]
+            i=self.current_step
+            for x in range(self.current_step,self.total_steps+1):
+                while i<=self.total_steps:
+                    self.calculation_count += 1
+                    i+=1
+                results.append(self.calculation_count)
+            return results
+
+def main():
+    
+    new_challenge = ClimbStairs()
+    print('Ways to climb to top: ' + str(len(new_challenge.calc_solutions())))
+    print('Total calculations performed: ' + str(sum(new_challenge.calc_solutions())))
+
+if __name__=="__main__":
+    main()
+
+
+    
+"""
     def __init__(self, total_steps=10): 
         self.total_steps = total_steps
         self.calculation_count = 0
 
-    """
-    This function calculates how many solutions are there to reach the top when I am currently at the ith step
-    i - the step I am currently at
-    """
+
+    #This function calculates how many solutions are there to reach the top when I am currently at the ith step
+    #i - the step I am currently at
+    
+   
+
+
     def calc_solutions(self, i):
         # If the current step is already larger than total steps, there's 0 solution
         if i > self.total_steps:
@@ -54,3 +96,5 @@ total_steps = input("How many steps in the stair?")
 new_challenge = ClimbStairs(int(total_steps))
 print('Ways to climb to top: ' + str(new_challenge.solve()))
 print('Total calculations performed: ' + str(new_challenge.get_calculation_count()))
+
+"""
