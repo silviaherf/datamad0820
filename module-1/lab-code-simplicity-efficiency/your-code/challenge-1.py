@@ -28,15 +28,13 @@ def calculator():
             result=numbers[a]+numbers[c]
         elif numbers[b]=='-':
             if numbers[a]>=numbers[c]:
-                result=numbers[a]-numbers[c]
                 key=''
-                key=[k for k,v in numbers.items() if v==result][0]
+                key=[k for k,v in numbers.items() if v==(numbers[a]-numbers[c])][0]
             else:
                 key=''
-                result=(-(numbers[a]-numbers[c]))
-                key="negative "+ [k for k,v in numbers.items() if v==result][0]
+                key="negative "+ [k for k,v in numbers.items() if v==(-(numbers[a]-numbers[c]))][0]
     
-        print(f"{a} {b} {c} equals {key}")
+            print(f"{a} {b} {c} equals {key}")
 
     return print("Thanks for using this calculator, goodbye :)")
 
