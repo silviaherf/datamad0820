@@ -38,7 +38,11 @@ def calculator():
 
     return print("Thanks for using this calculator, goodbye :)")
 
-calculator()
+def main():
+    return calculator()
+
+if __name__=="__main__":
+    main()
 
 
 
