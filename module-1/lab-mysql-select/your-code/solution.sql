@@ -81,7 +81,7 @@ JOIN sales AS sa ON t.title_id=sa.title_id
 JOIN titleauthor AS ta ON t.title_id=ta.title_id
 JOIN authors AS au ON ta.au_id=au.au_id
 GROUP BY au.au_id
-ORDER BY sum(round(ro.royalty/100*t.price*sum(t.ytd_sales),2)) DESC) as royalty
+ORDER BY sum(advance*royaltyper/100) + sum(ytd_sales*royalty*royaltyper/10000)  DESC) as royalty
 
 JOIN (SELECT au.au_id AS "AUTHOR ID", au.au_lname AS "LAST NAME", 
  au.au_fname AS "FIRST NAME", 
@@ -94,3 +94,31 @@ RIGHT JOIN authors AS au ON ta.au_id=au.au_id
 GROUP BY au.au_id
 ORDER BY sum(t.ytd_sales) DESC) as titles ON ro.title_id=t.title_id
 ;
+
+#Otra opción:
+
+SELECT
+
+    CONCAT(au.au_fname," ",au.au_lname) AS "Name",
+
+    SUM(ti.advance*(ta.royaltyper/100)+sa.qty*ti.price*(ti.royalty/100)*(ta.royaltyper/100)) AS "Total"
+
+FROM
+
+	authors AS au
+
+    INNER JOIN titleauthor AS ta
+
+		ON au.au_id = ta.au_id
+
+    INNER JOIN titles AS ti
+
+		ON ta.title_id = ti.title_id
+
+    INNER JOIN sales as sa
+
+		ON ti.title_id = sa.title_id
+
+GROUP BY au.au_id
+
+ORDER BY Total DESC;
